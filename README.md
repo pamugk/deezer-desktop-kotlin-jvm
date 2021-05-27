@@ -1,0 +1,1 @@
+deezer-desktop-kotlin-jvm
