@@ -1,20 +1,32 @@
+import androidx.compose.desktop.AppManager
 import androidx.compose.desktop.Window
-import androidx.compose.material.Text
-import androidx.compose.material.Button
-import androidx.compose.material.MaterialTheme
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.ui.ExperimentalComposeUiApi
+import androidx.compose.ui.window.application
+import androidx.compose.ui.window.v1.MenuItem
+import androidx.compose.ui.window.v1.Tray
+import utils.readImage
 
-fun main() = Window {
-    var text by remember { mutableStateOf("Hello, World!") }
+@OptIn(ExperimentalComposeUiApi::class)
+fun main() = application {
+    val windowIcon = remember { mutableStateOf(readImage("/assets/deezer/logotype/DIGITAL_RGB/PNG/Colored_Equalizer@2x.png")) }
 
-    MaterialTheme {
-        Button(onClick = {
-            text = "Hello, Desktop!"
-        }) {
-            Text(text)
+    Window(icon = windowIcon.value) {
+        DisposableEffect(Unit) {
+            val tray = Tray().apply {
+                icon(windowIcon.value)
+                menu(
+                    MenuItem(
+                        name = "Quit",
+                        onClick = { AppManager.exit() }
+                    )
+                )
+            }
+            onDispose {
+                tray.remove()
+            }
         }
     }
 }
