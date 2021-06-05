@@ -6,7 +6,7 @@ import javax.imageio.ImageIO
 fun readImage(iconPath: String): BufferedImage {
     var image: BufferedImage? = null
     try {
-        image = ImageIO.read({}.javaClass.getResourceAsStream(iconPath))
+        image = {}.javaClass.getResourceAsStream(iconPath).use { ImageIO.read(it) }
     } catch (e: Exception) {
     }
 
