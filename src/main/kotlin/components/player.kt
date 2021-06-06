@@ -9,7 +9,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.svgResource
-import androidx.compose.ui.unit.dp
 
 @Composable
 fun player(modifier: Modifier = Modifier) {
@@ -24,7 +23,7 @@ fun player(modifier: Modifier = Modifier) {
             Icon(svgResource("assets/fontawesome/svgs/solid/step-forward.svg"), "Next")
         }
         Spacer(Modifier.weight(0.1f))
-        Column(modifier = Modifier.align(Alignment.CenterVertically).weight(0.6f)) {
+        Column(Modifier.weight(0.6f), Arrangement.Center) {
             Row(modifier = Modifier.weight(0.5f)) {
                 Text(""); Text("")
                 Spacer(Modifier.weight(1.0f))
